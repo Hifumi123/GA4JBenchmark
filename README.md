@@ -28,7 +28,7 @@ $X_e^*(s) = \frac 1T \sum_{t=1}^T f_e^*(t)$
 
 ## 依赖
 
-依赖 [GA4J](https://github.com/Hifumi123/GA4J)、[GA4J Examples](https://github.com/Hifumi123/GA4JExamples) 和 [Apache Commons CSV](https://commons.apache.org/proper/commons-csv)，见 POM 文件。
+依赖 [GA4J](https://github.com/Hifumi123/GA4J)、[GA4J Examples](https://github.com/Hifumi123/GA4JExamples)、[Apache Commons CSV](https://commons.apache.org/proper/commons-csv) 和 [JUnit 5](https://junit.org/junit5)，见 POM 文件。
 
 ## 更新记录
 

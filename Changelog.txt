@@ -14,3 +14,4 @@
 13、修改 DJF1 类和 DJF2 类，以适应新的 Item 接口。
 14、修改 Benchmark 类的 performItem 方法以适应新的 Item 接口和 AbstractChromosomeGenerator 类。
 15、为 DJF1 添加单元测试。
+16、更新 README 文档。
