@@ -19,30 +19,31 @@ import com.hifumi123.ga4j.examples.djf1.CustomIndividualGenerator;
  */
 public class DJF1 implements Item {
 	
-	private int lengthOfChromosome;
+	private int lengthOfOxCode;
 	
 	private Random random;
 	
 	public DJF1() {
-		lengthOfChromosome = 30;
+		lengthOfOxCode = 10;
 		random = new Random();
 	}
 	
 	@Override
-	public boolean[] generateGenes() {
-		boolean[] genes = new boolean[lengthOfChromosome];
-		for (int i = 0; i < genes.length; i++)
-			genes[i] = random.nextBoolean();
-		
-		return genes;
+	public int getNX() {
+		return 3;
 	}
-
+	
 	@Override
-	public long run(List<boolean[]> genesList, Scheme scheme, BenchmarkDataCollector dataCollector) {		
+	public int generateInt() {
+		return random.nextInt((int) Math.pow(2, lengthOfOxCode));
+	}
+	
+	@Override
+	public long run(List<int[]> oxsList, Scheme scheme, BenchmarkDataCollector dataCollector) {		
 		AbstractChromosomeGenerator chromosomeGenerator = scheme.getChromosomeGenerator();
 		chromosomeGenerator.resetIndex();
-		chromosomeGenerator.setLengthOfChromosome(lengthOfChromosome);
-		chromosomeGenerator.setGenesList(genesList);
+		chromosomeGenerator.setLengthOfOxCode(lengthOfOxCode);
+		chromosomeGenerator.setOxsList(oxsList);
 		
 		CustomIndividualGenerator individualGenerator = new CustomIndividualGenerator(chromosomeGenerator);
 		CustomEvaluator evaluator = new CustomEvaluator();

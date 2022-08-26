@@ -4,9 +4,11 @@ import java.util.List;
 
 public interface Item {
 	
-	public boolean[] generateGenes();
-
-	public long run(List<boolean[]> genesList, Scheme scheme, BenchmarkDataCollector dataCollector);
+	public int getNX();
+	
+	public int generateInt();
+	
+	public long run(List<int[]> oxsList, Scheme scheme, BenchmarkDataCollector dataCollector);
 	
 	public String getName();
 }

@@ -6,21 +6,21 @@ import com.hifumi123.ga4j.examples.ChromosomeGenerator;
 
 public abstract class AbstractChromosomeGenerator implements ChromosomeGenerator {
 	
-	protected List<boolean[]> genesList;
+	protected List<int[]> oxsList;
+	
+	protected int indexOfOxsInList;
+	
+	protected int lengthOfOxCode;
 
-	protected int lengthOfChromosome;
-	
-	protected int indexOfGenesInList;
-	
 	public void resetIndex() {
-		indexOfGenesInList = 0;
+		indexOfOxsInList = 0;
 	}
 
-	public void setGenesList(List<boolean[]> genesList) {
-		this.genesList = genesList;
+	public void setOxsList(List<int[]> oxsList) {
+		this.oxsList = oxsList;
 	}
 
-	public void setLengthOfChromosome(int lengthOfChromosome) {
-		this.lengthOfChromosome = lengthOfChromosome;
+	public void setLengthOfOxCode(int lengthOfOxCode) {
+		this.lengthOfOxCode = lengthOfOxCode;
 	}
 }

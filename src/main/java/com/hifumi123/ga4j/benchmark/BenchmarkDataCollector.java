@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.hifumi123.ga4j.AbstractIndividual;
 import com.hifumi123.ga4j.DataCollector;
+import com.hifumi123.ga4j.Population;
 
 public class BenchmarkDataCollector implements DataCollector {
 	
@@ -46,16 +47,16 @@ public class BenchmarkDataCollector implements DataCollector {
 		
 		return sum / generation;
 	}
-
+	
 	@Override
-	public void collectData(List<AbstractIndividual> individuals, int generation) {
-		AbstractIndividual first = individuals.get(0);
+	public void collectData(Population population, int generation) {
+		AbstractIndividual first = population.get(0);
 		double sumFitness = first.getFitness();
 		AbstractIndividual best = first;
 		
 		
-		for (int i = 1; i < individuals.size(); i++) {
-			AbstractIndividual ai = individuals.get(i);
+		for (int i = 1; i < population.size(); i++) {
+			AbstractIndividual ai = population.get(i);
 			
 			if (ai.getFitness() > best.getFitness())
 				best = ai;
@@ -64,7 +65,7 @@ public class BenchmarkDataCollector implements DataCollector {
 		}
 		
 		bestFitnessList.add(best.getFitness());
-		meanFitnessList.add(sumFitness / individuals.size());
+		meanFitnessList.add(sumFitness / population.size());
 		
 		if (generation > 0) {
 			onlinePerformanceList.add(computeOnlinePerformance(generation));

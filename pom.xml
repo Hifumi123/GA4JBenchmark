@@ -3,29 +3,39 @@
   
   <groupId>com.hifumi123</groupId>
   <artifactId>ga4j-benchmark</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <name>GA4J Benchmark</name>
   
   <dependencies>
   	<dependency>
   		<groupId>com.hifumi123</groupId>
   		<artifactId>ga4j</artifactId>
-  		<version>0.1.0</version>
+  		<version>0.2.0</version>
   	</dependency>
   	<dependency>
   		<groupId>com.hifumi123</groupId>
   		<artifactId>ga4j-examples</artifactId>
-  		<version>0.1.0</version>
+  		<version>0.2.0</version>
   	</dependency>
   	<dependency>
   		<groupId>org.apache.commons</groupId>
   		<artifactId>commons-csv</artifactId>
   		<version>1.9.0</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.junit.jupiter</groupId>
+  		<artifactId>junit-jupiter</artifactId>
+  		<version>5.9.0</version>
+  		<scope>test</scope>
+  	</dependency>
   </dependencies>
   
   <build>
   	<plugins>
+  		<plugin>
+  			<artifactId>maven-surefire-plugin</artifactId>
+  			<version>2.22.2</version>
+  		</plugin>
   		<plugin>
   			<groupId>org.apache.maven.plugins</groupId>
   			<artifactId>maven-compiler-plugin</artifactId>
@@ -35,6 +45,19 @@
   				<target>1.8</target>
   				<encoding>UTF-8</encoding>
   			</configuration>
+  		</plugin>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-source-plugin</artifactId>
+  			<version>3.2.1</version>
+  			<executions>
+  				<execution>
+  					<id>attach-sources</id>
+  					<goals>
+  						<goal>jar</goal>
+  					</goals>
+  				</execution>
+  			</executions>
   		</plugin>
   		<plugin>
   			<!-- 默认不需要 groupId -->

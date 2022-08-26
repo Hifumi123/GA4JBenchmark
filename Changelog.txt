@@ -1,0 +1,16 @@
+0.2.0 相对 0.1.0 的改动：
+1、POM 文件中增加 maven-source-plugin 配置。
+2、修复 Benchmark 类中写 Fitness.csv 文件的 CSVPrinter 对象未关闭的错误。
+3、适配 GA4J 0.2.0 版本和 GA4J Examples 0.2.0 版本。
+4、修改 BenchmarkDataCollector 类以适配 GA4J 0.2.0 版本。
+5、删除 ElitistModelGeneticAlgorithmGenerator 类以适配 GA4J 0.2.0 版本。
+6、修改 AbstractChromosomeGenerator 类的成员变量，保证每一轮中使用同一组基因型生成个体。
+7、修改 BinaryChromosomeGenerator 类的 generateChromosome 方法，保证每一轮中使用同一组基因型生成个体。
+8、修改 GrayCodeChromosomeGenerator 类的 generateChromosome 方法，保证每一轮中使用同一组基因型生成个体。
+9、POM 文件中增加 JUnit 依赖和 maven-surefire-plugin 插件配置以支持单元测试。
+10、为 BinaryChromosomeGenerator 添加单元测试。
+11、为 GrayCodeChromosomeGenerator 添加单元测试。
+12、修改 Item 接口以适应新的 AbstractChromosomeGenerator 类。
+13、修改 DJF1 类和 DJF2 类，以适应新的 Item 接口。
+14、修改 Benchmark 类的 performItem 方法以适应新的 Item 接口和 AbstractChromosomeGenerator 类。
+15、为 DJF1 添加单元测试。

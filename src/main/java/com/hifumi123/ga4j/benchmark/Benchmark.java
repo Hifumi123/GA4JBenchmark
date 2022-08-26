@@ -10,6 +10,7 @@ import org.apache.commons.csv.CSVPrinter;
 
 import com.hifumi123.ga4j.crossover.OnePointCrossover;
 import com.hifumi123.ga4j.mutation.SimpleMutation;
+import com.hifumi123.ga4j.selection.ElitistProportionalModelSelection;
 import com.hifumi123.ga4j.selection.ProportionalModelSelection;
 
 public class Benchmark {
@@ -23,14 +24,19 @@ public class Benchmark {
 		for (int i = 0; i < totalTurn; i++) {
 			List<BenchmarkDataCollector> dataCollectorList = new ArrayList<BenchmarkDataCollector>();
 			
-			List<boolean[]> genesList = new ArrayList<boolean[]>();
-			for (int j = 0; j < schemeList.get(0).getPopulationSize(); j++)//TODO 后续再改
-				genesList.add(item.generateGenes());
+			List<int[]> oxsList = new ArrayList<int[]>();
+			for (int j = 0; j < schemeList.get(0).getPopulationSize(); j++) {//TODO 后续再改
+				int[] oxs = new int[item.getNX()];
+				for (int k = 0; k < oxs.length; k++)
+					oxs[k] = item.generateInt();
+				
+				oxsList.add(oxs);
+			}
 			
 			for (int j = 0; j < schemeList.size(); j++) {
 				BenchmarkDataCollector dataCollector = new BenchmarkDataCollector();
 				
-				long duration = item.run(genesList, schemeList.get(j), dataCollector);
+				long duration = item.run(oxsList, schemeList.get(j), dataCollector);
 				
 				dataCollectorList.add(dataCollector);
 				durationListEveryScheme.get(j).add(duration);
@@ -66,6 +72,7 @@ public class Benchmark {
 			printer1.close();
 			printer2.close();
 			printer3.close();
+			printer4.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,13 +88,13 @@ public class Benchmark {
 		GrayCodeChromosomeGenerator grayCodeChromosomeGenerator = new GrayCodeChromosomeGenerator();
 		
 		ProportionalModelSelection proportionalModelSelection = new ProportionalModelSelection();
+		ElitistProportionalModelSelection elitistProportionalModelSelection = new ElitistProportionalModelSelection();
 		
 		OnePointCrossover onePointCrossover = new OnePointCrossover();
 		
 		SimpleMutation simpleMutation = new SimpleMutation();
 		
 		SimpleGeneticAlgorithmGenerator simpleGeneticAlgorithmGenerator = new SimpleGeneticAlgorithmGenerator();
-		ElitistModelGeneticAlgorithmGenerator elitistModelGeneticAlgorithmGenerator = new ElitistModelGeneticAlgorithmGenerator();
 		
 		int totalTurn = 100;
 		
@@ -97,9 +104,9 @@ public class Benchmark {
 		
 		List<Scheme> schemeList = new ArrayList<Scheme>();
 		schemeList.add(new Scheme(populationSize, maxGeneration, probabilityOfCrossover, probabilityOfMutation, binaryChromosomeGenerator, proportionalModelSelection, onePointCrossover, simpleMutation, simpleGeneticAlgorithmGenerator));
-		schemeList.add(new Scheme(populationSize, maxGeneration, probabilityOfCrossover, probabilityOfMutation, binaryChromosomeGenerator, proportionalModelSelection, onePointCrossover, simpleMutation, elitistModelGeneticAlgorithmGenerator));
+		schemeList.add(new Scheme(populationSize, maxGeneration, probabilityOfCrossover, probabilityOfMutation, binaryChromosomeGenerator, elitistProportionalModelSelection, onePointCrossover, simpleMutation, simpleGeneticAlgorithmGenerator));
 		schemeList.add(new Scheme(populationSize, maxGeneration, probabilityOfCrossover, probabilityOfMutation, grayCodeChromosomeGenerator, proportionalModelSelection, onePointCrossover, simpleMutation, simpleGeneticAlgorithmGenerator));
-		schemeList.add(new Scheme(populationSize, maxGeneration, probabilityOfCrossover, probabilityOfMutation, grayCodeChromosomeGenerator, proportionalModelSelection, onePointCrossover, simpleMutation, elitistModelGeneticAlgorithmGenerator));
+		schemeList.add(new Scheme(populationSize, maxGeneration, probabilityOfCrossover, probabilityOfMutation, grayCodeChromosomeGenerator, elitistProportionalModelSelection, onePointCrossover, simpleMutation, simpleGeneticAlgorithmGenerator));
 		
 		for (int i = 0; i < itemList.size(); i++)
 			performItem(itemList.get(i), totalTurn, schemeList);
